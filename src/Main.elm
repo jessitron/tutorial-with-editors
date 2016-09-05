@@ -55,4 +55,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    Html.div [] []
+    Html.div []
+        [ Html.h1 [] [ Html.text (toString model.dieFace) ]
+        , Html.button [] [ Html.text "Roll" ]
+        ]
