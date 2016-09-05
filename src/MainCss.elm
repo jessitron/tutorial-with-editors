@@ -8,5 +8,9 @@ import Css.Namespace exposing (namespace)
 css : Stylesheet
 css =
     (stylesheet << namespace "tutorialWithEditors")
-        [ Css.Elements.img [ display block, margin auto ]
+        [ Css.Elements.img
+            [ display block
+            , margin2 (px 5) auto
+            ]
+        , Css.Elements.div [ textAlign center ]
         ]
