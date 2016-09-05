@@ -2,6 +2,7 @@ module Main exposing (main)
 
 import Html exposing (Html)
 import Html.App
+import Html.Attributes
 
 
 main : Program Never
@@ -60,4 +61,8 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    Html.div [] []
+    Html.div []
+        [ Html.h2 [] [ Html.text model.topic ]
+        , Html.img [ Html.Attributes.src model.gifUrl ] []
+        , Html.button [] [ Html.text "More Please!" ]
+        ]
