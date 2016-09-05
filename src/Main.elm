@@ -3,6 +3,7 @@ module Main exposing (main)
 import Html exposing (Html)
 import Html.App
 import Html.Events
+import Random
 
 
 main : Program Never
@@ -49,10 +50,10 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         NewFace int ->
-            model ! []
+            { model | dieFace = int } ! []
 
         Roll ->
-            model ! []
+            model ! [ Random.generate NewFace (Random.int 1 6) ]
 
         Noop ->
             model ! []
