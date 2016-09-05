@@ -7,4 +7,6 @@ import Css.Namespace exposing (namespace)
 
 css : Stylesheet
 css =
-    (stylesheet << namespace "tutorialWithEditors") []
+    (stylesheet << namespace "tutorialWithEditors")
+        [ Css.Elements.img [ display block, margin auto ]
+        ]
