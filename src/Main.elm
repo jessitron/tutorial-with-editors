@@ -33,11 +33,15 @@ model =
 type Msg
     = Noop
     | Increment
+    | Decrement
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
+        Decrement ->
+            model
+
         Increment ->
             { model | counter = model.counter + 1 }
 
