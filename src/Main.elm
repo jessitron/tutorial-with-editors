@@ -6,7 +6,7 @@ import Html.App
 
 main : Program Never
 main =
-    { model = init
+    { model = model
     , update = update
     , view = view
     }
@@ -21,7 +21,7 @@ type alias Model =
     {}
 
 
-init =
+model =
     {}
 
 
@@ -30,14 +30,14 @@ init =
 
 
 type Msg
-    = Reset
+    = Noop
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        Reset ->
-            init
+        Noop ->
+            model
 
 
 
