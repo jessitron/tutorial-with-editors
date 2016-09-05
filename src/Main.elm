@@ -18,11 +18,11 @@ main =
 
 
 type alias Model =
-    {}
+    { content : String }
 
 
 model =
-    {}
+    { content = "" }
 
 
 
