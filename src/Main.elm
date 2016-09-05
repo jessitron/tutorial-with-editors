@@ -2,6 +2,7 @@ module Main exposing (main)
 
 import Html exposing (Html)
 import Html.App
+import Html.Events
 
 
 main : Program Never
@@ -61,5 +62,5 @@ view : Model -> Html Msg
 view model =
     Html.div []
         [ Html.h1 [] [ Html.text (toString model.dieFace) ]
-        , Html.button [] [ Html.text "Roll" ]
+        , Html.button [ Html.Events.onClick Roll ] [ Html.text "Roll" ]
         ]
