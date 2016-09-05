@@ -22,12 +22,14 @@ main =
 type alias Model =
     { name : String
     , password : String
+    , passwordAgain : String
     }
 
 
 model =
     { name = ""
     , password = ""
+    , passwordAgain = ""
     }
 
 
@@ -39,6 +41,7 @@ type Msg
     = Noop
     | Name String
     | Password String
+    | PasswordAgain String
 
 
 update : Msg -> Model -> Model
@@ -49,6 +52,9 @@ update msg model =
 
         Password string ->
             { model | password = string }
+
+        PasswordAgain string ->
+            { model | passwordAgain = string }
 
         Noop ->
             model
@@ -80,5 +86,14 @@ passwordInput model =
         [ Html.Attributes.placeholder "password"
         , Html.Attributes.type' "password"
         , Html.Events.onInput Password
+        ]
+        []
+
+
+passwordAgainInput model =
+    Html.input
+        [ Html.Attributes.placeholder "passwordAgain"
+        , Html.Attributes.type' "password"
+        , Html.Events.onInput PasswordAgain
         ]
         []
