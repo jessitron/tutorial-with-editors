@@ -19,11 +19,11 @@ main =
 
 
 type alias Model =
-    {}
+    { dieFace : Int }
 
 
 init =
-    {} ! []
+    { dieFace = 6 } ! []
 
 
 
