@@ -6,6 +6,7 @@ import Html.Attributes
 import Html.Events
 import Http
 import Task
+import Json.Decode
 
 
 main : Program Never
@@ -58,16 +59,27 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         FetchSucceed string ->
-            model ! []
+            { model | gifUrl = string } ! []
 
         FetchFail error ->
             model ! []
 
         MorePlease ->
-            model ! []
+            model ! [ getRandomGif model.topic ]
 
         Noop ->
             model ! []
+
+
+getRandomGif topic =
+    let
+        url =
+            "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=" ++ topic
+
+        decodeGifUrl =
+            Json.Decode.at [ "data", "image_url" ] Json.Decode.string
+    in
+        fetch decodeGifUrl url
 
 
 fetch decoder url =
