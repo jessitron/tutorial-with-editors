@@ -69,6 +69,7 @@ view model =
     Html.div []
         [ nameInput model
         , passwordInput model
+        , passwordAgainInput model
         ]
 
 
