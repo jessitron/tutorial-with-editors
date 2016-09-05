@@ -8,10 +8,11 @@ import Html.Events
 
 main : Program Never
 main =
-    Html.App.beginnerProgram
-        { model = model
+    Html.App.program
+        { init = init
         , update = update
         , view = view
+        , subscriptions = subscriptions
         }
 
 
@@ -26,11 +27,20 @@ type alias Model =
     }
 
 
-model =
+init =
     { name = ""
     , password = ""
     , passwordAgain = ""
     }
+        ! []
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions model =
+    Sub.none
 
 
 
@@ -44,8 +54,12 @@ type Msg
     | PasswordAgain String
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
+    (updateModel msg model) ! []
+
+
+updateModel msg model =
     case msg of
         Name string ->
             { model | name = string }
