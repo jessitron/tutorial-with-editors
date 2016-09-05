@@ -40,11 +40,15 @@ subscriptions model =
 
 type Msg
     = Noop
+    | Roll
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        Roll ->
+            model ! []
+
         Noop ->
             model ! []
 
