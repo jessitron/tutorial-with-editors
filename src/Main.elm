@@ -51,7 +51,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    Html.div [] []
+    Html.div [] [ nameInput model ]
 
 
 nameInput model =
