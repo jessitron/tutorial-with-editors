@@ -2,6 +2,8 @@ module Main exposing (main)
 
 import Html exposing (Html)
 import Html.App
+import Html.Attributes
+import String
 
 
 main : Program Never
@@ -46,4 +48,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    Html.div [] []
+    Html.div []
+        [ Html.input [ Html.Attributes.placeholder "Text to reverse" ] []
+        , Html.div [] [ Html.text (String.reverse model.content) ]
+        ]
