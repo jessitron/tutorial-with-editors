@@ -70,7 +70,21 @@ view model =
         [ nameInput model
         , passwordInput model
         , passwordAgainInput model
+        , viewValidation model
         ]
+
+
+viewValidation : Model -> Html msg
+viewValidation model =
+    let
+        ( color, message ) =
+            if model.password == model.passwordAgain then
+                ( "green", "OK" )
+            else
+                ( "red", "Passwords do not match!" )
+    in
+        Html.div [ Html.Attributes.style [ ( "color", color ) ] ]
+            [ Html.text message ]
 
 
 nameInput model =
