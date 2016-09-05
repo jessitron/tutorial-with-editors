@@ -3,6 +3,7 @@ module Main exposing (main)
 import Html exposing (Html)
 import Html.App
 import Html.Attributes
+import Html.Events
 
 
 main : Program Never
@@ -68,5 +69,5 @@ view model =
     Html.div []
         [ Html.h2 [] [ Html.text model.topic ]
         , Html.img [ Html.Attributes.src model.gifUrl ] []
-        , Html.button [] [ Html.text "More Please!" ]
+        , Html.button [ Html.Events.onClick MorePlease ] [ Html.text "More Please!" ]
         ]
