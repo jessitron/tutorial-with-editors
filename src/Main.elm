@@ -40,7 +40,7 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         Decrement ->
-            model
+            { model | counter = model.counter - 1 }
 
         Increment ->
             { model | counter = model.counter + 1 }
@@ -56,6 +56,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     Html.div []
-        [ Html.text (toString model.counter)
+        [ Html.button [ Html.Events.onClick Decrement ] [ Html.text "-" ]
+        , Html.text (toString model.counter)
         , Html.button [ Html.Events.onClick Increment ] [ Html.text "+" ]
         ]
