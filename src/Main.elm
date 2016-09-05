@@ -19,11 +19,16 @@ main =
 
 
 type alias Model =
-    {}
+    { topic : String
+    , gifUrl : String
+    }
 
 
 init =
-    {} ! []
+    { topic = "cats"
+    , gifUrl = "waiting.gif"
+    }
+        ! []
 
 
 
