@@ -2,6 +2,7 @@ module Main exposing (main)
 
 import Html exposing (Html)
 import Html.App
+import Html.Events
 
 
 main : Program Never
@@ -38,7 +39,7 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         Increment ->
-            model
+            { model | counter = model.counter + 1 }
 
         Noop ->
             model
@@ -50,4 +51,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    Html.div [] [ Html.text (toString model.counter) ]
+    Html.div []
+        [ Html.text (toString model.counter)
+        , Html.button [ Html.Events.onClick Increment ] [ Html.text "+" ]
+        ]
