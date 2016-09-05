@@ -60,7 +60,10 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    Html.div [] [ nameInput model ]
+    Html.div []
+        [ nameInput model
+        , passwordInput model
+        ]
 
 
 nameInput model =
