@@ -33,11 +33,15 @@ model =
 
 type Msg
     = Noop
+    | Change String
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
+        Change string ->
+            model
+
         Noop ->
             model
 
