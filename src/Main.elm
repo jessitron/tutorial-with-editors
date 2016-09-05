@@ -4,6 +4,8 @@ import Html exposing (Html)
 import Html.App
 import Html.Attributes
 import Html.Events
+import Http
+import Task
 
 
 main : Program Never
@@ -48,16 +50,28 @@ subscriptions model =
 type Msg
     = Noop
     | MorePlease
+    | FetchSucceed String
+    | FetchFail Http.Error
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        FetchSucceed string ->
+            model ! []
+
+        FetchFail error ->
+            model ! []
+
         MorePlease ->
             model ! []
 
         Noop ->
             model ! []
+
+
+fetch decoder url =
+    Task.perform FetchFail FetchSucceed (Http.get decoder url)
 
 
 
