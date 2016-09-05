@@ -18,11 +18,11 @@ main =
 
 
 type alias Model =
-    {}
+    { counter : Int }
 
 
 model =
-    {}
+    { counter = 0 }
 
 
 
