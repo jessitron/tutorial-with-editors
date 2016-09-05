@@ -31,11 +31,15 @@ model =
 
 type Msg
     = Noop
+    | Increment
 
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
+        Increment ->
+            model
+
         Noop ->
             model
 
