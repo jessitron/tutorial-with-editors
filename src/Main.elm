@@ -6,8 +6,9 @@ import Html.App
 
 main : Program Never
 main =
-    Html.App.beginnerProgram
-        { model = model
+    Html.App.program
+        { init = init
+        , subscriptions = subscriptions
         , update = update
         , view = view
         }
@@ -21,8 +22,16 @@ type alias Model =
     {}
 
 
-model =
-    {}
+init =
+    {} ! []
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions model =
+    Sub.none
 
 
 
@@ -33,11 +42,11 @@ type Msg
     = Noop
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Noop ->
-            model
+            model ! []
 
 
 
