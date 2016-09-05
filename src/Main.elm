@@ -46,4 +46,4 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    Html.div [] []
+    Html.div [] [ Html.text (toString model.counter) ]
