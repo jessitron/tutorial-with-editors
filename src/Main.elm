@@ -6,11 +6,11 @@ import Html.App
 
 main : Program Never
 main =
-    { model = model
-    , update = update
-    , view = view
-    }
-        |> Html.App.beginnerProgram
+    Html.App.beginnerProgram
+        { model = model
+        , update = update
+        , view = view
+        }
 
 
 
