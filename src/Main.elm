@@ -2,6 +2,7 @@ module Main exposing (main)
 
 import Html exposing (Html)
 import Html.App
+import Html.Attributes
 import Html.Events
 
 
@@ -55,4 +56,9 @@ view model =
 
 
 nameInput model =
-    Html.input [ Html.Events.onInput Name ] []
+    Html.input
+        [ Html.Attributes.placeholder "name"
+        , Html.Attributes.type' "text"
+        , Html.Events.onInput Name
+        ]
+        []
