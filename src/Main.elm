@@ -7,6 +7,7 @@ import Html.Events
 import Http
 import Task
 import Json.Decode
+import RandomGif
 
 
 main : Program Never
@@ -24,16 +25,16 @@ main =
 
 
 type alias Model =
-    { topic : String
-    , gifUrl : String
-    }
+    { randomGif : RandomGif.Model }
 
 
 init =
-    { topic = "cats"
-    , gifUrl = "waiting.gif"
-    }
-        ! []
+    let
+        ( randomGifModel, randomGifCommands ) =
+            RandomGif.init
+    in
+        { randomGif = randomGifModel }
+            ! [ randomGifCommands ]
 
 
 
@@ -41,7 +42,7 @@ init =
 
 
 subscriptions model =
-    Sub.none
+    Sub.batch [ RandomGif.subscriptions model.randomGif ]
 
 
 
@@ -50,40 +51,23 @@ subscriptions model =
 
 type Msg
     = Noop
-    | MorePlease
-    | FetchSucceed String
-    | FetchFail Http.Error
+    | RandomGifMsg RandomGif.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        FetchSucceed string ->
-            { model | gifUrl = string } ! []
-
-        FetchFail error ->
-            model ! []
-
-        MorePlease ->
-            model ! [ getRandomGif model.topic ]
+        RandomGifMsg randomGifMsg ->
+            let
+                ( randomGifModel, randomGifCommands ) =
+                    RandomGif.update randomGifMsg model.randomGif
+            in
+                ( { model | randomGif = randomGifModel }
+                , Cmd.map RandomGifMsg randomGifCommands
+                )
 
         Noop ->
             model ! []
-
-
-getRandomGif topic =
-    let
-        url =
-            "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=" ++ topic
-
-        decodeGifUrl =
-            Json.Decode.at [ "data", "image_url" ] Json.Decode.string
-    in
-        fetch decodeGifUrl url
-
-
-fetch decoder url =
-    Task.perform FetchFail FetchSucceed (Http.get decoder url)
 
 
 
@@ -93,7 +77,4 @@ fetch decoder url =
 view : Model -> Html Msg
 view model =
     Html.div []
-        [ Html.h2 [] [ Html.text model.topic ]
-        , Html.img [ Html.Attributes.src model.gifUrl ] []
-        , Html.button [ Html.Events.onClick MorePlease ] [ Html.text "More Please!" ]
-        ]
+        [ Html.App.map RandomGifMsg (RandomGif.view model.randomGif) ]
