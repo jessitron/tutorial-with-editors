@@ -8,6 +8,7 @@ import Http
 import Task
 import Json.Decode
 import RandomGif
+import Login
 
 
 main : Program Never
@@ -25,15 +26,22 @@ main =
 
 
 type alias Model =
-    { randomGif : RandomGif.Model }
+    { randomGif : RandomGif.Model
+    , login : Login.Model
+    }
 
 
 init =
     let
         ( randomGifModel, randomGifCommands ) =
             RandomGif.init
+
+        loginModel =
+            Login.model
     in
-        { randomGif = randomGifModel }
+        { randomGif = randomGifModel
+        , login = loginModel
+        }
             ! [ randomGifCommands ]
 
 
@@ -52,6 +60,7 @@ subscriptions model =
 type Msg
     = Noop
     | RandomGifMsg RandomGif.Msg
+    | LoginMsg Login.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -66,6 +75,13 @@ update msg model =
                 , Cmd.map RandomGifMsg randomGifCommands
                 )
 
+        LoginMsg loginMsg ->
+            let
+                loginModel =
+                    Login.update loginMsg model.login
+            in
+                { model | login = loginModel } ! []
+
         Noop ->
             model ! []
 
@@ -77,4 +93,6 @@ update msg model =
 view : Model -> Html Msg
 view model =
     Html.div []
-        [ Html.App.map RandomGifMsg (RandomGif.view model.randomGif) ]
+        [ Html.App.map LoginMsg (Login.view model.login)
+        , Html.App.map RandomGifMsg (RandomGif.view model.randomGif)
+        ]
