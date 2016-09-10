@@ -8,6 +8,7 @@ import Http
 import Task
 import Json.Decode
 import RandomGif.Model exposing (Model)
+import Model as TopLevel
 
 
 -- MODEL
@@ -70,10 +71,14 @@ fetch decoder url =
 -- VIEW
 
 
-view : Model -> Html Msg
+view : TopLevel.Model -> Html Msg
 view model =
-    Html.div []
-        [ Html.h2 [] [ Html.text model.topic ]
-        , Html.img [ Html.Attributes.src model.gifUrl ] []
-        , Html.button [ Html.Events.onClick MorePlease ] [ Html.text "More Please!" ]
-        ]
+    let
+        myModel =
+            model.randomGif
+    in
+        Html.div []
+            [ Html.h2 [] [ Html.text myModel.topic ]
+            , Html.img [ Html.Attributes.src myModel.gifUrl ] []
+            , Html.button [ Html.Events.onClick MorePlease ] [ Html.text "More Please!" ]
+            ]

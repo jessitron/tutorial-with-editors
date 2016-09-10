@@ -89,5 +89,5 @@ view : Model -> Html Msg
 view model =
     Html.div []
         [ Html.App.map LoginMsg (Login.view model.login)
-        , Html.App.map RandomGifMsg (RandomGif.view model.randomGif)
+        , Html.App.map RandomGifMsg (RandomGif.view model)
         ]
