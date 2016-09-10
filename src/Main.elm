@@ -7,6 +7,7 @@ import Html.Events
 import Http
 import Task
 import Json.Decode
+import Model exposing (Model)
 import RandomGif
 import Login
 
@@ -23,12 +24,6 @@ main =
 
 
 -- MODEL
-
-
-type alias Model =
-    { randomGif : RandomGif.Model
-    , login : Login.Model
-    }
 
 
 init =
