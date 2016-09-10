@@ -1,4 +1,4 @@
-module Login exposing (Model, model, Msg, update, view)
+module Login exposing (isLoggedIn, Model, model, Msg, update, view)
 
 import Html exposing (Html)
 import Html.App

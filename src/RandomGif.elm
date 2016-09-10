@@ -4,11 +4,13 @@ import Html exposing (Html)
 import Html.App
 import Html.Attributes
 import Html.Events
+import Css
 import Http
 import Task
 import Json.Decode
 import RandomGif.Model exposing (Model)
 import Model as TopLevel
+import Login
 
 
 -- MODEL
@@ -76,8 +78,14 @@ view model =
     let
         myModel =
             model.randomGif
+
+        visible =
+            if Login.isLoggedIn model.login then
+                "visible"
+            else
+                "hidden"
     in
-        Html.div []
+        Html.div [ Html.Attributes.style [ ( "visibility", visible ) ] ]
             [ Html.h2 [] [ Html.text myModel.topic ]
             , Html.img [ Html.Attributes.src myModel.gifUrl ] []
             , Html.button [ Html.Events.onClick MorePlease ] [ Html.text "More Please!" ]
