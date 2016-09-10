@@ -1,4 +1,4 @@
-module RandomGif exposing (Model, init, Msg, update, view, subscriptions)
+module RandomGif exposing (init, Msg, update, view, subscriptions)
 
 import Html exposing (Html)
 import Html.App
@@ -7,15 +7,10 @@ import Html.Events
 import Http
 import Task
 import Json.Decode
+import RandomGif.Model exposing (Model)
 
 
 -- MODEL
-
-
-type alias Model =
-    { topic : String
-    , gifUrl : String
-    }
 
 
 init =

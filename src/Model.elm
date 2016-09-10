@@ -1,10 +1,10 @@
 module Model exposing (Model)
 
-import RandomGif
+import RandomGif.Model
 import Login
 
 
 type alias Model =
-    { randomGif : RandomGif.Model
+    { randomGif : RandomGif.Model.Model
     , login : Login.Model
     }
