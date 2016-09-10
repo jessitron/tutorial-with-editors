@@ -4,6 +4,23 @@ import Html exposing (Html)
 import Html.App
 import Html.Attributes
 import Html.Events
+import String
+
+
+-- interface
+
+
+isLoggedIn : Model -> Bool
+isLoggedIn model =
+    let
+        nameOK =
+            not (String.isEmpty model.name)
+
+        passwordOK =
+            not (String.isEmpty model.password) && (passwordsMatch model)
+    in
+        nameOK && passwordOK
+
 
 
 -- MODEL
@@ -60,17 +77,21 @@ view model =
         ]
 
 
-viewValidation : Model -> Html msg
+viewValidation : Model -> Html Msg
 viewValidation model =
     let
         ( color, message ) =
-            if model.password == model.passwordAgain then
+            if passwordsMatch model then
                 ( "green", "OK" )
             else
                 ( "red", "Passwords do not match!" )
     in
         Html.div [ Html.Attributes.style [ ( "color", color ) ] ]
             [ Html.text message ]
+
+
+passwordsMatch model =
+    model.password == model.passwordAgain
 
 
 nameInput model =
